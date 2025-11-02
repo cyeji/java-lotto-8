@@ -4,7 +4,8 @@ public class MoneyInput {
 
     /**
      * 금액 유효성 검사
-     * @param money
+     * @param money 입력받은 금액 (1000원 단위여야 함)
+     * @return 유효성 검사를 통과한 금액
      */
     public int validateMoney(int money) {
         if (money < 1000 || money % 1000 != 0) {
