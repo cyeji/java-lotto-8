@@ -44,9 +44,10 @@ public class Lotto {
     }
 
     public int countMatching(Lotto other) {
+        Set<Integer> otherSet = new HashSet<>(other.getNumbers());
         int count = 0;
         for (Integer n : numbers) {
-            if (other.numbers.contains(n)) {
+            if (otherSet.contains(n)) {
                 count++;
             }
         }
