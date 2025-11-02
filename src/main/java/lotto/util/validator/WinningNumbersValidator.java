@@ -17,8 +17,8 @@ public class WinningNumbersValidator {
 
     /**
      * 당첨 번호 유효성 검사
-     * @param raw
-     * @return
+     * @param raw 쉼표로 구분된 6개의 숫자(문자열) 입력값
+     * @return 유효성 검사를 통과한, 오름차순으로 정렬된 당첨 번호의 정수 리스트
      */
     public List<Integer> validate(String raw) {
         if (raw == null) {
