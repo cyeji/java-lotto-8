@@ -22,7 +22,7 @@ public class ConsoleInput {
         String input = Console.readLine();
         try {
             return moneyInput.validateMoney(Integer.parseInt(input));
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
         }
 
