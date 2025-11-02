@@ -16,8 +16,8 @@ public class BonusNumberValidator {
 
     /**
      * 보너스 번호 유효성 검사
-     * @param raw
-     * @return
+     * @param raw 보너스 번호로 입력된 문자열
+     * @return 유효성 검사를 통과한 보너스 번호 (정수)
      */
     public int validate(String raw) {
         if (raw == null) {
