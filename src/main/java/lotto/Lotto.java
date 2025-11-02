@@ -1,20 +1,78 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        List<Integer> copy = new ArrayList<>(numbers);
+        Collections.sort(copy);
+        this.numbers = Collections.unmodifiableList(copy);
     }
 
     private void validate(List<Integer> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 null일 수 없습니다.");
+        }
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
+        Set<Integer> set = new HashSet<>(numbers);
+        if (set.size() != 6) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호에 중복이 있으면 안 됩니다.");
+        }
+        for (Integer n : numbers) {
+            if (n == null || n < 1 || n > 45) {
+                throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            }
+        }
     }
 
-    // TODO: 추가 기능 구현
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public int countMatching(Lotto other) {
+        Set<Integer> otherSet = new HashSet<>(other.getNumbers());
+        int count = 0;
+        for (Integer n : numbers) {
+            if (otherSet.contains(n)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Lotto)) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return numbers.equals(lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
